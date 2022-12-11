@@ -4,25 +4,63 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(4, 81, 112);
-    color: #fff;
+    background-color: rgb(13, 134, 233);
 }
 
-.navbar-menu{
+.container-logo{
+    width: 10%;
+}
+
+.container-logo > img{
+    width: 80%;
+    height: 10vh;
+    object-fit: cover;
+}
+
+.navbar{
     width: 70%;
     height: 10vh;
     display: flex;
     justify-content: space-evenly;
     align-items: center;    
+}
+
+.navbar-item{
     list-style: none;
-    font-size: 18px;
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
 }
 
-.navbar-logo{
-    padding: 0 10px;
+.navbar-item:hover{
+    color:rgb(8, 8, 8);
 }
 
-.navbar-carrito{
-    padding: 0 10px;
-    margin-right: 50px;
+.logo-navbar{
+    width: 10%;
+}
+
+.container-carrito{
+    width: 100%;
+    margin-right: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.carrito-counter{
+    position: absolute;
+    top:-60%;
+    right: 15%;
+    width: 30px;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

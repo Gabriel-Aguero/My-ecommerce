@@ -1,9 +1,22 @@
-import { FaCartPlus } from 'react-icons/fa';
+import "./CartWidget.css"
+import { BsFillCartCheckFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom'
+
 
 export const CartWidget = () => {
     return(
-        <div className="navbar-carrito">
-            <FaCartPlus size={30} /> 1
-    </div>
+        <Link to="/carrito">
+            <div className="container-carrito">
+                <BsFillCartCheckFill
+                    style={{
+                        fontSize: "2rem",
+                        color: "black",
+                    }}
+                /> 
+                <div className="carrito-counter">
+                    <span>12</span>
+                </div>
+            </div>
+        </Link>
     )
 }

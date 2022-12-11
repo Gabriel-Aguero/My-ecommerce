@@ -1,14 +1,28 @@
-import { ItemListContainer } from "./components/itemListContainer/ItemListContainer";
+import { ItemListContainer } from "./components/itemListContainer/ItemListContainer.jsx";
 import { NavBar } from "./components/navBar/NavBar";
-
+import  { ItemDetailContainer } from "./components/itemDetailContainer/ItemDetailContainer";
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
+    
        <NavBar />
-       <ItemListContainer greeting={"Bienvenido a mi E-commerce con React. Mi nombre es Gabriel Aguero."}/>
-    </div>
+       
+       <Routes>
+          <Route path="/" element={ <ItemListContainer /> }/>
+        
+          <Route path="/categoria/:categoriaName" element={ <ItemListContainer /> }/>
+          <Route path="/categoria" element={ <ItemListContainer /> }/>
+        
+          <Route path="/itemDetail/:id" element={ <ItemDetailContainer /> } />
+        
+          <Route path="/carrito" element={<h3>Aqui vista carrito</h3>} />
+          <Route path="*" element={<h3>Esta pagina no existe</h3>} />
+      </Routes>
+    
+    </BrowserRouter>
   );
 }
 

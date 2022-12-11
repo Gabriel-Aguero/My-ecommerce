@@ -1,0 +1,35 @@
+useEffect tambien es una funcion que nbos permite
+manipular o interactuar con el ciclo de vida de un estado.
+
+******* Ejemplo *********
+ 
+ opcion 1: casi nunca se usa. En este caso el useEffect solo 
+ recibe un parametro y esto permite que se ejecute cuando se renderiza
+ el componente. cada ves que ocurre un cambio se vuelve a renderizar
+ el componente y se vuelve a ejecutar el useEffect.
+
+
+ useEffect( ()=>{
+     console.log( "hola dentro del primer efecto")
+   })
+
+ ------------------------------------------------------
+ opcion 2: se usa seguido. En este caso el useEffect recibe 2 parametros
+ el primero una funcion y el segundo un array vacio. 
+ de esta manera el componente cuando se renderiza todo lo que esta
+ dentro de este useEffect no re vuelve a renderizar. 
+
+   useEffect( ()=>{
+     console.log("hola desde el efecto con array de dependencia vacio")
+   } , []) // ARREGLO DE DEPENDENCIAS VACIO
+
+opcion 3: se usa seguido. En este caso como el anterior, pero con }
+la diferencia que el segundo parametro es una condicion es decir
+que el useEffect esta a la escucha de esa variable cuando surge un 
+cambio ahi se ejecuta.  
+
+   useEffect( ()=>{
+     console.log("hola desde el efecto con array de dependencia a la escucha de NUM")
+   } , [ num ]) // ARREGLO DE DEPENDENCIAS
+
+
