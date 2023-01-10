@@ -8,12 +8,12 @@
 }
 
 .container-logo{
-    width: 10%;
+    width: 5%;
 }
 
 .container-logo > img{
-    width: 80%;
-    height: 10vh;
+    width: 50%;
+    height: 5vh;
     object-fit: cover;
 }
 
@@ -37,10 +37,6 @@
 
 .navbar-item:hover{
     color:rgb(8, 8, 8);
-}
-
-.logo-navbar{
-    width: 10%;
 }
 
 .container-carrito{

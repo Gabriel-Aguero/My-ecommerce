@@ -1,9 +1,16 @@
 import { useState, useEffect } from 'react';
-import { products } from "../../productsMock";
 import { ItemList } from "../itemList/ItemList";
-import { Container } from '@mui/material';
-import { ItemCount } from '../itemCount/ItemCount';
 import { useParams } from "react-router-dom"
+import PacmanLoader from "react-spinners/PacmanLoader";
+import { getDocs, collection, query, where } from "firebase/firestore"
+import { db } from "../../firebaseConfig"
+
+
+const override = {
+  display: "block",
+  margin: "20% 50%",
+  borderColor: "blue",
+};
 
 
 export const ItemListContainer = ( { greeting } ) => {
@@ -14,33 +21,59 @@ export const ItemListContainer = ( { greeting } ) => {
   // y la incializamos como un array vacio. 
   const [items, setItems] = useState([]);
   const { categoriaName } = useParams();
-
+  const [isLoading, setIsLoading] = useState(false);
   
   
   useEffect(() => {
     
-    const productosFilrados = products.filter(productos => productos.categoria === categoriaName);
-    const task = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(categoriaName ? productosFilrados : products);
-      }, 500);
-    });
+    setIsLoading(true);
     
-    task 
-    .then((res) => {
-      setItems(res);
-    })
-    .catch((err) => {
-      console.log("Se rechazo la solicitud");
-    });
+    const itemCollection = collection( db, "products")
+
+    if (categoriaName) {
+      const consulta = query( itemCollection, where("categoria" , "==" , categoriaName ) )
+      getDocs(consulta)
+      .then( (res) => { 
+        const products = res.docs.map( product => {
+          return {
+            id: product.id,
+            ...product.data()
+          }
+        })
+        setItems(products)
+      })
+      .catch( (err) => console.log(err))
+
+    } else {
+      getDocs(itemCollection)
+        .then( (res) => { 
+          const products = res.docs.map( product => {
+            return {
+              id: product.id,
+              ...product.data()
+            }
+          })
+          setItems(products)
+        })
+        .catch( (err) => console.log(err))
+    }
+
+    setTimeout( () => {
+      setIsLoading(false)
+    }, 1000)
 
   }, [ categoriaName ]);
 
     return (
-      <Container fixed>  
-      <h2>{greeting}</h2>
-      <ItemCount stock={10} initial={0}/>
-      <ItemList items={items} />
-      </Container>
+      <div className="light">  
+        {isLoading ? 
+            <PacmanLoader
+            color={"blue"}
+            cssOverride={override}
+            size={50}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          /> : <ItemList items={items} />}
+      </div>
   )
 }
